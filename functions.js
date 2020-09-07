@@ -53,7 +53,33 @@ let products = [
 let chosenDepartment = "";
 
 function renderProducts() {
-  let html = ""; // Your code here!
+
+
+
+  let html = products
+  .filter(product => product.quantity > 0)
+  .filter(product => {
+    if (chosenDepartment == "") {
+      return true;
+    } else if (product.department == chosenDepartment) {
+      return true;
+    }
+  })
+  .map(function(product) {
+    return `
+      <li>
+        <h3>
+        ${product.name}
+        </h3>
+        Price: $${product.price}
+      </li>` 
+  })
+  .reduce(function(accumulatedText, textOfProduct){
+      return accumulatedText + textOfProduct;
+  })
+
+
+
   /*
     using the product array
 
